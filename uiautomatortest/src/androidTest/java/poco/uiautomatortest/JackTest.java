@@ -57,25 +57,25 @@ public class JackTest extends InstrumentationTestCase {
 //        assertThat(mDevice, notNullValue());
 //    }
 //
-//    @Test
-//    public void calculatorTest() {
-////        mDevice.findObject(By.desc("应用")).click();
-////        mDevice.wait(Until.hasObject(By.desc("简客")), LAUNCH_TIMEOUT);
-////        mDevice.findObject(By.desc("简客")).click();
-//
-////        UiObject2 button7 = mDevice.wait(Until.findObject(By.res("com.android.calculator2", "digit_7")), 500);
-////        UiObject2 buttonX = mDevice.wait(Until.findObject(By.res("com.android.calculator2", "op_mul")), 500);
-////        UiObject2 button6 = mDevice.wait(Until.findObject(By.res("com.android.calculator2", "digit_6")), 500);
-////        UiObject2 buttonEqual = mDevice.wait(Until.findObject(By.res("com.android.calculator2", "eq")), 500);
-////        UiObject2 output = mDevice.wait(Until.findObject(By.res("com.android.calculator2", "result")), 500);
-////
-////        button7.click();
-////        buttonX.click();
-////        button6.click();
-////        buttonEqual.click();
-////        assertEquals(output.getText(), "42");
-//
-//    }
+    @Test
+    public void calculatorTest() {
+        mDevice.findObject(By.desc("应用")).click();
+        mDevice.wait(Until.hasObject(By.desc("简客")), LAUNCH_TIMEOUT);
+        mDevice.findObject(By.desc("简客")).click();
+
+        UiObject2 button7 = mDevice.wait(Until.findObject(By.res("com.android.calculator2", "digit_7")), 500);
+        UiObject2 buttonX = mDevice.wait(Until.findObject(By.res("com.android.calculator2", "op_mul")), 500);
+        UiObject2 button6 = mDevice.wait(Until.findObject(By.res("com.android.calculator2", "digit_6")), 500);
+        UiObject2 buttonEqual = mDevice.wait(Until.findObject(By.res("com.android.calculator2", "eq")), 500);
+        UiObject2 output = mDevice.wait(Until.findObject(By.res("com.android.calculator2", "result")), 500);
+
+        button7.click();
+        buttonX.click();
+        button6.click();
+        buttonEqual.click();
+        assertEquals(output.getText(), "42");
+
+    }
 //
 //    private String getLauncherPackageName() {
 //        // Create launcher Intent
