@@ -79,33 +79,33 @@ public class MainActivity extends Activity {
 //					Toast.makeText(getApplicationContext(), "请尝试打开录音权限！", Toast.LENGTH_SHORT).show();		//没有录音权限
 //				}
 
-				Context context=getApplicationContext();
-				PackageManager pm = getApplicationContext().getPackageManager();
-//				boolean permission = false;
-				ApplicationInfo ai;
-				try {
-					ai = pm.getApplicationInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
-					AppOpsManager manager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-
-					Class clazz = manager.getClass();
-					Method m1 = clazz.getMethod("checkOp", int.class, int.class, String.class);
-					int checkResult = (Integer) m1.invoke(manager, 27, ai.uid, context.getPackageName());
-					if(checkResult==AppOpsManager.MODE_ALLOWED){
-
-						Toast.makeText(getApplicationContext(), "开始录音！", Toast.LENGTH_SHORT).show();
-						aac.prepare();
-						aac.start();
-					}else{
-						Toast.makeText(getApplicationContext(), "请尝试打开录音权限！", Toast.LENGTH_SHORT).show();
-					}
-				}catch (Exception e){
-				}
-//				if(aac.prepare()){
-//				Toast.makeText(getApplicationContext(), "开始录音！", Toast.LENGTH_SHORT).show();
-//					aac.start();
-//				}else{
-//					Toast.makeText(getApplicationContext(), "请尝试打开录音权限！", Toast.LENGTH_SHORT).show();
+//				Context context=getApplicationContext();
+//				PackageManager pm = getApplicationContext().getPackageManager();
+////				boolean permission = false;
+//				ApplicationInfo ai;
+//				try {
+//					ai = pm.getApplicationInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
+//					AppOpsManager manager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+//
+//					Class clazz = manager.getClass();
+//					Method m1 = clazz.getMethod("checkOp", int.class, int.class, String.class);
+//					int checkResult = (Integer) m1.invoke(manager, 27, ai.uid, context.getPackageName());
+//					if(checkResult==AppOpsManager.MODE_ALLOWED){
+//
+//						Toast.makeText(getApplicationContext(), "开始录音！", Toast.LENGTH_SHORT).show();
+//						aac.prepare();
+//						aac.start();
+//					}else{
+//						Toast.makeText(getApplicationContext(), "请尝试打开录音权限！", Toast.LENGTH_SHORT).show();
+//					}
+//				}catch (Exception e){
 //				}
+				if(aac.prepare()){
+				Toast.makeText(getApplicationContext(), "开始录音！", Toast.LENGTH_SHORT).show();
+					aac.start();
+				}else{
+					Toast.makeText(getApplicationContext(), "请尝试打开录音权限！", Toast.LENGTH_SHORT).show();
+				}
 			}
 			if(v==bt2){
 				aac.stop();
