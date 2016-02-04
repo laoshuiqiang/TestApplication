@@ -23,7 +23,7 @@ public class RecordAAC {
     private final int STATE_RECORDING = 0x04;//正在录制
     private final int STATE_STOP = 0x05;//停止
 
-    private  int mPrepareCount=0;
+    private int mPrepareCount = 0;
 
     private int mState = -1;
     private int mMsg = MSG_SUCCESS;
@@ -50,9 +50,9 @@ public class RecordAAC {
      * @return false 权限没开，true正常录音
      */
     public boolean prepare() {
-        if(mPrepareCount==2){//初始化两次都不成功返回false
+        if (mPrepareCount == 2) {//初始化两次都不成功返回false
             return false;
-        }else{
+        } else {
             mPrepareCount++;
         }
 
@@ -72,7 +72,7 @@ public class RecordAAC {
             return false;
         }
 
-        int bufferRead =AudioRecord.ERROR_INVALID_OPERATION;
+        int bufferRead = AudioRecord.ERROR_INVALID_OPERATION;
         if (mRecordecordInstance != null) {
             bufferRead = mRecordecordInstance.read(tempBuffer, 0, READ_SIZE);
         } else {
@@ -80,7 +80,7 @@ public class RecordAAC {
         }
 
         if (bufferRead == AudioRecord.ERROR_INVALID_OPERATION) {
-            if(mRecordecordInstance!=null){
+            if (mRecordecordInstance != null) {
                 mRecordecordInstance.stop();
                 mRecordecordInstance.release();
                 mRecordecordInstance = null;
@@ -95,7 +95,7 @@ public class RecordAAC {
      * 录制开始
      */
     public void start() {
-        mPrepareCount=0;
+        mPrepareCount = 0;
         try {
             fos = new FileOutputStream(mFilePath);
         } catch (FileNotFoundException e1) {
@@ -219,8 +219,10 @@ public class RecordAAC {
         }
         mRecordThread = null;
         try {
-            fos.flush();
-            fos.close();
+            if (fos != null) {
+                fos.flush();
+                fos.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
             mMsg = MSG_FAIL;//失败
@@ -241,10 +243,14 @@ public class RecordAAC {
             // TODO Auto-generated method stub
             switch (msg.what) {
                 case MSG_SUCCESS:
-                    mRecordAACListener.isSuccess(true);//录制成功
+                    if (mRecordAACListener != null) {
+                        mRecordAACListener.isSuccess(true);//录制成功
+                    }
                     break;
                 case MSG_FAIL:
-                    mRecordAACListener.isSuccess(false);//录制失败
+                    if (mRecordAACListener != null) {
+                        mRecordAACListener.isSuccess(false);//录制失败
+                    }
                     break;
             }
         }
